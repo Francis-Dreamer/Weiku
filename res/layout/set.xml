@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:orientation="vertical" >
+
+    <include layout="@layout/top" />
+
+    <RelativeLayout
+        android:id="@+id/rlayout_set_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px70"
+        android:background="#ffffff"
+        android:padding="@dimen/px20"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人信息"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/rlayout_set_wenjuandiaocha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px70"
+        android:background="#ffffff"
+        android:padding="@dimen/px20"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="问卷调查"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/rlayout_set_anquanzhongxin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="@dimen/px20"
+        android:layout_marginTop="@dimen/px1"
+        android:layout_marginBottom="@dimen/px1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="安全中心"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right" />
+    </RelativeLayout>
+    
+    
+    <RelativeLayout
+        android:id="@+id/rlayout_set_pifushezhi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="@dimen/px20"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="皮肤设置"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right" />
+    </RelativeLayout>
+    
+    
+    <RelativeLayout
+        android:id="@+id/rlayout_set_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="@dimen/px1"
+        android:padding="@dimen/px20"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关于味酷"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/set_outLogin"
+        android:layout_width="@dimen/px500"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_login_button"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/px100"
+        android:paddingBottom="@dimen/px20"
+        android:paddingTop="@dimen/px20"
+        android:text="退出登录"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/px32" />
+
+</LinearLayout>
