@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:orientation="vertical" >
+
+    <include layout="@layout/top" />
+
+    <TextView
+        android:id="@+id/tv_mine_icon"
+        android:layout_width="@dimen/px170"
+        android:layout_height="@dimen/px170"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/px90"
+        android:layout_marginTop="@dimen/px90"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:drawableTop="@drawable/icon"
+        android:drawablePadding="@dimen/px20"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/px25"
+        android:textColor="@android:color/black"
+        android:text="李易峰"/>
+
+    <RelativeLayout
+        android:id="@+id/rlayout_mine_collect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收藏"
+            android:drawablePadding="@dimen/px10"
+            android:drawableLeft="@drawable/collect"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlayout_mine_issua"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/px10"
+        android:layout_marginTop="@dimen/px10"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发表"
+             android:drawablePadding="@dimen/px20"
+            android:drawableLeft="@drawable/issua"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlayout_mine_attention"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关注"
+             android:drawablePadding="@dimen/px20"
+            android:drawableLeft="@drawable/attention"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlayout_mine_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px10"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置"
+             android:drawablePadding="@dimen/px10"
+            android:drawableLeft="@drawable/set"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right" />
+    </RelativeLayout>
+</LinearLayout>
