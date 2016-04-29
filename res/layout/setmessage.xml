@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:orientation="vertical" >
+
+    <include layout="@layout/top" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px120"
+        android:layout_marginTop="@dimen/px70"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="头像"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:id="@+id/setmsg_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px120"
+        android:layout_marginTop="@dimen/px70"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="昵称"
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/setmsg_username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/px50"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入昵称"
+            android:textSize="@dimen/px22" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px120"
+        android:layout_marginBottom="@dimen/px1"
+        android:layout_marginTop="@dimen/px1"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="性别"
+            android:textColor="@android:color/black" />
+
+        <RadioGroup
+            android:id="@+id/setmsg_radiogroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/px50"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/setmsg_rbtn_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/checkbox"
+                android:paddingLeft="@dimen/px10"
+                android:text="男"
+                android:textColor="@android:color/black" />
+
+            <RadioButton
+                android:id="@+id/setmsg_rbtn_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/px20"
+                android:button="@drawable/checkbox"
+                android:paddingLeft="@dimen/px10"
+                android:text="女"
+                android:textColor="@android:color/black" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px120"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="年龄"
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/setmsg_age"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/px50"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入年龄"
+            android:textSize="@dimen/px22" />
+    </LinearLayout>
+
+</LinearLayout>
