@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/px100"
         android:background="#ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal" >
 
         <TextView
@@ -38,6 +40,8 @@
         android:layout_marginBottom="@dimen/px1"
         android:layout_marginTop="@dimen/px1"
         android:background="#ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal" >
 
         <TextView
@@ -78,6 +82,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal" >
 
         <TextView
@@ -105,7 +111,7 @@
         android:layout_marginBottom="@dimen/px25"
         android:layout_marginLeft="@dimen/px20"
         android:layout_marginTop="@dimen/px25"
-        android:button="@drawable/checkbox"
+        android:button="@drawable/selector_checkbox"
         android:paddingLeft="@dimen/px20"
         android:text="我已认真阅读并同意该用户协议。"
         android:textColor="@android:color/black"

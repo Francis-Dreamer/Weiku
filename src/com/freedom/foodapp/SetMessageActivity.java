@@ -39,21 +39,23 @@ public class SetMessageActivity extends Activity implements
 		
 		iv_back = (ImageView) findViewById(R.id.back);
 		tv_save = (TextView) findViewById(R.id.right);
+		tv_save.setText("ä¿å­˜");
+		tv_save.setVisibility(View.VISIBLE);
 		iv_back.setOnClickListener(this);
 		tv_save.setOnClickListener(this);
 		
 		tv_title = (TextView) findViewById(R.id.title);
-		tv_title.setText("¸öÈËĞÅÏ¢");
+		tv_title.setText("ä¸ªäººä¿¡æ¯");
 	}
 
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
 		case R.id.setmsg_rbtn_man:
-			sex = "ÄĞ";
+			sex = "ç”·";
 			break;
 		case R.id.setmsg_rbtn_woman:
-			sex = "Å®";
+			sex = "å¥³";
 			break;
 		default:
 			break;
@@ -77,18 +79,12 @@ public class SetMessageActivity extends Activity implements
 		}
 	}
 
-	/**
-	 * ±£´æ
-	 */
 	private void saveMsg() {
 		String username = et_username.getText().toString().trim();
 		String age = et_age.getText().toString().trim();
 		
 	}
 
-	/**
-	 * ÉèÖÃÍ·Ïñ
-	 */
 	private void setIcon() {
 		
 	}

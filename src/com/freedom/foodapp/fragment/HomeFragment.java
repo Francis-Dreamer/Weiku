@@ -16,20 +16,23 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.freedom.foodapp.FoodMessageActivity;
 import com.freedom.foodapp.R;
+import com.freedom.foodapp.adapter.HomeAdapter;
 import com.freedom.foodapp.adapter.HomeViewPagerAdapter;
+import com.freedom.foodapp.model.FoodModel;
+import com.freedom.foodapp.view.MyGridView;
 
 public class HomeFragment extends Fragment implements OnClickListener,
 		OnItemClickListener, OnPageChangeListener, OnCheckedChangeListener {
 	View view;
-	GridView gridView;
+	MyGridView gridView;
 	ViewPager viewPager;
 	ImageView imageView;
 	TextView tv_title, tv_search;
@@ -37,6 +40,8 @@ public class HomeFragment extends Fragment implements OnClickListener,
 	List<Integer> data_pic;
 	RadioGroup group;
 	RadioButton rbtn1, rbtn2, rbtn3;
+	HomeAdapter adapter_home;
+	List<FoodModel> data;
 
 	@SuppressLint("InflateParams")
 	@Override
@@ -56,6 +61,8 @@ public class HomeFragment extends Fragment implements OnClickListener,
 		data_pic.add(R.drawable.viewpager1);
 		data_pic.add(R.drawable.viewpager2);
 		data_pic.add(R.drawable.viewpager3);
+		
+		data = FoodModel.getData();
 	}
 
 	private void initView() {
@@ -84,8 +91,10 @@ public class HomeFragment extends Fragment implements OnClickListener,
 		viewPager.setAdapter(adapter);
 		viewPager.setOnPageChangeListener(this);
 		
-		gridView = (GridView) view.findViewById(R.id.home_gridview);
+		gridView = (MyGridView) view.findViewById(R.id.home_gridview);
 		gridView.setOnItemClickListener(this);
+		adapter_home = new HomeAdapter(getActivity(),data);
+		gridView.setAdapter(adapter_home);
 	}
 
 	@Override
@@ -103,7 +112,20 @@ public class HomeFragment extends Fragment implements OnClickListener,
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-
+		Bundle bundle = new Bundle();
+		bundle.putString("title", data.get(position).getTitle());
+		bundle.putString("image", data.get(position).getImage());
+		bundle.putString("name", data.get(position).getName());
+		bundle.putString("time", data.get(position).getTime());
+		bundle.putInt("like", data.get(position).getLike());
+		bundle.putString("cailiao", data.get(position).getMaterial());
+		bundle.putString("step", data.get(position).getStep());
+		bundle.putBoolean("isLike", data.get(position).isLike());
+		bundle.putBoolean("isCollect", data.get(position).isCollect());
+		
+		Intent intent = new Intent(getActivity(),FoodMessageActivity.class);
+		intent.putExtras(bundle);
+		startActivityForResult(intent, 0);
 	}
 
 	@Override

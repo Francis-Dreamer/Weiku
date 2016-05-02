@@ -48,19 +48,31 @@
         <activity
             android:name="com.freedom.foodapp.YindaoPageActivity"
             android:label="@string/app_name" >
-            <intent-filter>
+        </activity>
+        <activity android:name="com.freedom.foodapp.LoginActivity" >
+        </activity>
+        <activity android:name="com.freedom.foodapp.AllPageActivity" >
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.freedom.foodapp.LoginActivity" >
-        </activity>
-        <activity android:name="com.freedom.foodapp.AllPageActivity" >
-        </activity>
         <activity android:name="com.freedom.foodapp.RegisterActivity" >
         </activity>
         <activity android:name="com.freedom.foodapp.SetActivity" >
+        </activity>
+        <activity android:name="com.freedom.foodapp.SetMessageActivity" >
+        </activity>
+        <activity android:name="com.freedom.foodapp.FooderIssuaActivity" >
+        </activity>
+        <activity android:name="com.freedom.foodapp.MyAttentionActivity" >
+        </activity>
+        <activity android:name="com.freedom.foodapp.MyCollectActivity" >
+        </activity>
+        <activity android:name="com.freedom.foodapp.MyIssuaActivity" >
+        </activity>
+        <activity android:name="com.freedom.foodapp.IssuaFoodActivity" >
         </activity>
     </application>
 

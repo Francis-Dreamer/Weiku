@@ -4,11 +4,13 @@ import java.util.List;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 
 public class HomeViewPagerAdapter extends PagerAdapter {
 
@@ -20,7 +22,7 @@ public class HomeViewPagerAdapter extends PagerAdapter {
 
 	}
 
-	public HomeViewPagerAdapter(Context context,List<Integer> data) {
+	public HomeViewPagerAdapter(Context context, List<Integer> data) {
 		this.data = data;
 		this.context = context;
 		this.inflater = LayoutInflater.from(context);
@@ -29,12 +31,18 @@ public class HomeViewPagerAdapter extends PagerAdapter {
 	@Override
 	public int getCount() {
 		// 设置成最大，使用户看不到边界
-		return Integer.MAX_VALUE;
+		// return Integer.MAX_VALUE;
+		return data.size();
 	}
 
 	@Override
 	public boolean isViewFromObject(View arg0, Object arg1) {
 		return arg0 == arg1;
+	}
+
+	@Override
+	public void destroyItem(View container, int position, Object object) {
+		((ViewPager) container).removeView((View) object);
 	}
 
 	@Override
@@ -46,7 +54,8 @@ public class HomeViewPagerAdapter extends PagerAdapter {
 		}
 		ImageView view = new ImageView(context);
 		view.setImageResource(data.get(position));
-		
+		view.setScaleType(ScaleType.FIT_XY);
+
 		// 如果View已经在之前添加到了一个父组件，则必须先remove，否则会抛出IllegalStateException。
 		ViewParent vp = view.getParent();
 		if (vp != null) {

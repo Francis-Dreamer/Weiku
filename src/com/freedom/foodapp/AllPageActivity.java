@@ -3,20 +3,21 @@ package com.freedom.foodapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.freedom.foodapp.adapter.AllPagerAdapter;
 import com.freedom.foodapp.fragment.FoodFragment;
 import com.freedom.foodapp.fragment.HomeFragment;
 import com.freedom.foodapp.fragment.MineFragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-public class AllPageActivity extends Activity implements
+public class AllPageActivity extends FragmentActivity implements
 		OnCheckedChangeListener, OnPageChangeListener {
 	List<Fragment> list;
 	HomeFragment homeFragment;
@@ -55,6 +56,8 @@ public class AllPageActivity extends Activity implements
 		
 		viewPager = (ViewPager) findViewById(R.id.viewpager);
 		viewPager.setOnPageChangeListener(this);
+		AllPagerAdapter adapter = new AllPagerAdapter(getSupportFragmentManager(),list);
+		viewPager.setAdapter(adapter);
 	}
 
 	@Override

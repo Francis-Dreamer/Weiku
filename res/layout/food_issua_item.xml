@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:orientation="vertical" >
+
+    <include layout="@layout/top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px300"
+        android:layout_marginTop="@dimen/px10"
+        android:background="#ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/food_issua_image"
+            android:layout_width="@dimen/px400"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/item1" />
+
+        <TextView
+            android:id="@+id/food_issua_addPic"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="选择图片"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/px38" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px120"
+        android:layout_marginTop="@dimen/px10"
+        android:background="#ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="菜名"
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/food_issua_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/px50"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入菜名"
+            android:singleLine="true"
+            android:textSize="@dimen/px22" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px120"
+        android:layout_marginTop="@dimen/px10"
+        android:background="#ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px22"
+            android:text="材料"
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/food_issua_cailiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/px50"
+            android:layout_marginTop="@dimen/px3"
+            android:layout_toRightOf="@id/tv1"
+            android:background="@null"
+            android:hint="请输入材料"
+            android:textSize="@dimen/px22" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px120"
+        android:layout_marginTop="@dimen/px10"
+        android:background="#ffffff"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="@dimen/px20" >
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/px22"
+            android:text="步骤"
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/food_issua_step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv2"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/px50"
+            android:layout_marginTop="@dimen/px3"
+            android:layout_toRightOf="@id/tv2"
+            android:background="@null"
+            android:hint="请输入步骤"
+            android:textSize="@dimen/px22" />
+    </RelativeLayout>
+
+</LinearLayout>

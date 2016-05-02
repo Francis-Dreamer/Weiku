@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <include layout="@layout/top" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/foodMSG_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px380"
+                android:scaleType="fitXY" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F2F2F2"
+                android:paddingBottom="@dimen/px10"
+                android:paddingLeft="@dimen/px20"
+                android:paddingRight="@dimen/px20"
+                android:paddingTop="@dimen/px10" >
+
+                <TextView
+                    android:id="@+id/foodMSG_tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="qqq"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/foodMSG_tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/foodMSG_tv_name"
+                    android:text="2015-1-1"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/foodMSG_tv_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:drawableLeft="@drawable/like1"
+                    android:drawablePadding="@dimen/px8"
+                    android:text="11"
+                    android:textColor="@android:color/black" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/px5"
+                android:layout_marginTop="@dimen/px5"
+                android:background="#F2F2F2"
+                android:orientation="vertical"
+                android:padding="@dimen/px20" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="材料："
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/px35" />
+
+                <TextView
+                    android:id="@+id/foodMSG_tv_cailiao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/px50"
+                    android:text="11"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/px27" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/px5"
+                android:background="#F2F2F2"
+                android:orientation="vertical"
+                android:padding="@dimen/px20" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="步骤："
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/px35" />
+
+                <TextView
+                    android:id="@+id/foodMSG_tv_step"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/px27" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/foodMSG_listview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollbars="none" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/foodMSG_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/px20"
+                android:src="@drawable/comment" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <CheckBox
+                android:id="@+id/foodMSG_cb_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/px20"
+                android:src="@drawable/selector_cb_like" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <CheckBox
+                android:id="@+id/foodMSG_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/px20"
+                android:src="@drawable/selector_cb_collect" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

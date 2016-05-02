@@ -2,7 +2,9 @@ package com.freedom.foodapp.fragment;
 
 import com.freedom.foodapp.R;
 import com.freedom.foodapp.SetActivity;
+import com.freedom.foodapp.SetMessageActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,9 +20,10 @@ import android.widget.TextView;
 public class MineFragment extends Fragment implements OnClickListener {
 	View view;
 	RelativeLayout rl_collect, rl_issua, rl_attention, rl_set;
-	TextView tv_title, tv_right, tv_icon;
-	ImageView imageView;
+	TextView tv_title, tv_name;
+	ImageView imageView, iv_right, iv_icon;
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,17 +36,18 @@ public class MineFragment extends Fragment implements OnClickListener {
 
 	private void initView() {
 		tv_title = (TextView) view.findViewById(R.id.title);
-		tv_title.setText("ÎÒµÄ");
+		tv_title.setText("æˆ‘çš„");
 
-		tv_right = (TextView) view.findViewById(R.id.right);
-		tv_right.setBackgroundResource(R.drawable.fabu);
-		tv_right.setVisibility(View.VISIBLE);
-		tv_right.setOnClickListener(this);
+		iv_right = (ImageView) view.findViewById(R.id.rightImage);
+		iv_right.setImageResource(R.drawable.fabu);
+		iv_right.setVisibility(View.VISIBLE);
+		iv_right.setOnClickListener(this);
 
 		imageView = (ImageView) view.findViewById(R.id.back);
 		imageView.setVisibility(View.GONE);
 
-		tv_icon = (TextView) view.findViewById(R.id.tv_mine_icon);
+		iv_icon = (ImageView) view.findViewById(R.id.mine_icon);
+		tv_name = (TextView) view.findViewById(R.id.mine_name);
 
 		rl_collect = (RelativeLayout) view
 				.findViewById(R.id.rlayout_mine_collect);
@@ -62,9 +66,7 @@ public class MineFragment extends Fragment implements OnClickListener {
 		Intent intent = new Intent();
 		switch (v.getId()) {
 		case R.id.right:
-			break;
-		case R.id.tv_mine_icon:
-
+			intent.setClass(getActivity(), SetMessageActivity.class);
 			break;
 		case R.id.rlayout_mine_collect:
 

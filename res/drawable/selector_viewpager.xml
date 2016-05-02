@@ -8,10 +8,11 @@
         </shape>
     </item>
     
-    <item android:state_checked="false">
-        <shape android:shape="ring">
-            <solid android:color="#ffffff" />
+    <item>
+        <shape android:shape="oval" >
+            <solid android:color="@null" />
             <size android:width="@dimen/px30" android:height="@dimen/px30"/>
+            <stroke android:width="@dimen/px2" android:color="#ffffff"/>
         </shape>
     </item>
 
