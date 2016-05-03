@@ -1,17 +1,19 @@
 package com.freedom.foodapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 public class MyIssuaActivity extends Activity implements
-		OnItemLongClickListener, OnClickListener {
+		OnItemLongClickListener, OnClickListener, OnItemClickListener {
 	ListView listView;
 
 	@Override
@@ -37,6 +39,7 @@ public class MyIssuaActivity extends Activity implements
 
 		listView = (ListView) findViewById(R.id.myAttention_listview);
 		listView.setOnItemLongClickListener(this);
+		listView.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -55,5 +58,14 @@ public class MyIssuaActivity extends Activity implements
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		Bundle bundle = new Bundle();
+		Intent intent = new Intent(MyIssuaActivity.this,FoodMessageActivity.class);
+		intent.putExtras(bundle);
+		startActivityForResult(intent, 0);
 	}
 }

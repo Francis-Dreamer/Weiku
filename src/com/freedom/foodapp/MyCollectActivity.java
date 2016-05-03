@@ -1,17 +1,21 @@
 package com.freedom.foodapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MyCollectActivity extends Activity implements OnClickListener, OnItemLongClickListener {
+public class MyCollectActivity extends Activity implements OnClickListener,
+		OnItemLongClickListener, OnItemClickListener {
 	ListView listView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,12 +39,14 @@ public class MyCollectActivity extends Activity implements OnClickListener, OnIt
 
 		listView = (ListView) findViewById(R.id.myAttention_listview);
 		listView.setOnItemLongClickListener(this);
+		listView.setOnItemClickListener(this);
 	}
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
 			int position, long id) {
-
+		
+		
 		return false;
 	}
 
@@ -53,5 +59,14 @@ public class MyCollectActivity extends Activity implements OnClickListener, OnIt
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		Bundle bundle = new Bundle();
+		Intent intent = new Intent(MyCollectActivity.this,FoodMessageActivity.class);
+		intent.putExtras(bundle);
+		startActivityForResult(intent, 0);
 	}
 }

@@ -1,5 +1,8 @@
 package com.freedom.foodapp.fragment;
 
+import com.freedom.foodapp.MyAttentionActivity;
+import com.freedom.foodapp.MyIssuaActivity;
+import com.freedom.foodapp.MyCollectActivity;
 import com.freedom.foodapp.R;
 import com.freedom.foodapp.SetActivity;
 import com.freedom.foodapp.SetMessageActivity;
@@ -65,17 +68,17 @@ public class MineFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		Intent intent = new Intent();
 		switch (v.getId()) {
-		case R.id.right:
+		case R.id.rightImage:
 			intent.setClass(getActivity(), SetMessageActivity.class);
 			break;
 		case R.id.rlayout_mine_collect:
-
+			intent.setClass(getActivity(), MyCollectActivity.class);
 			break;
 		case R.id.rlayout_mine_issua:
-
+			intent.setClass(getActivity(), MyIssuaActivity.class);
 			break;
 		case R.id.rlayout_mine_attention:
-
+			intent.setClass(getActivity(), MyAttentionActivity.class);
 			break;
 		case R.id.rlayout_mine_set:
 			intent.setClass(getActivity(), SetActivity.class);

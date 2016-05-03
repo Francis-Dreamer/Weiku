@@ -1,13 +1,10 @@
 package com.freedom.foodapp.fragment;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
-import com.freedom.foodapp.R;
-import com.freedom.foodapp.adapter.FoodAdapter;
-import com.freedom.foodapp.adapter.FooderAdapter;
-import com.freedom.foodapp.adapter.FooderAdapter.OnSetAttentionClickListener;
-import com.freedom.foodapp.model.FoodModel;
-import com.freedom.foodapp.model.FooderModel;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -25,9 +22,20 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.freedom.foodapp.FoodMessageActivity;
+import com.freedom.foodapp.FooderIssuaActivity;
+import com.freedom.foodapp.R;
+import com.freedom.foodapp.adapter.FoodAdapter;
+import com.freedom.foodapp.adapter.FooderAdapter;
+import com.freedom.foodapp.adapter.FooderAdapter.OnSetAttentionClickListener;
+import com.freedom.foodapp.model.FoodModel;
+import com.freedom.foodapp.model.FooderModel;
+import com.freedom.foodapp.util.HttpPost;
+import com.freedom.foodapp.util.HttpPost.OnSendListener;
+
 @SuppressLint("InflateParams")
 public class FoodFragment extends Fragment implements OnCheckedChangeListener,
-		OnItemClickListener ,OnSetAttentionClickListener{
+		OnItemClickListener, OnSetAttentionClickListener {
 	View view;
 	ListView listView;
 	List<FoodModel> data_food;
@@ -71,6 +79,64 @@ public class FoodFragment extends Fragment implements OnCheckedChangeListener,
 		data_fooder = FooderModel.getData();
 	}
 
+	private void initFoodData() {
+		String url = "http://127.0.0.1/index.php/home/api/delicacy_show";
+		try {
+			HttpPost httpPost = HttpPost.parseUrl(url);
+			httpPost.send();
+			httpPost.setOnSendListener(new OnSendListener() {
+				@Override
+				public void start() {
+
+				}
+
+				@Override
+				public void end(String result) {
+					try {
+						JSONObject jo = new JSONObject(result);
+						int status = jo.getInt("status");
+						if (status == 1) {
+							//获取数据
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void initFooderData() {
+		String url = "http://127.0.0.1/index.php/home/api/master";
+		try {
+			HttpPost httpPost = HttpPost.parseUrl(url);
+			httpPost.send();
+			httpPost.setOnSendListener(new OnSendListener() {
+				@Override
+				public void start() {
+
+				}
+
+				@Override
+				public void end(String result) {
+					try {
+						JSONObject jo = new JSONObject(result);
+						int status = jo.getInt("status");
+						if (status == 1) {
+							//获取数据
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
@@ -87,7 +153,7 @@ public class FoodFragment extends Fragment implements OnCheckedChangeListener,
 
 	private void selectFooder() {
 		flog = true;
-		adapter_fooder = new FooderAdapter(getActivity(), data_fooder,this);
+		adapter_fooder = new FooderAdapter(getActivity(), data_fooder, this);
 		listView.setAdapter(adapter_fooder);
 	}
 
@@ -102,9 +168,11 @@ public class FoodFragment extends Fragment implements OnCheckedChangeListener,
 			long id) {
 		Intent intent = new Intent();
 		if (flog) {// 美食达人
-
+			Bundle bundle = new Bundle();
+			intent.setClass(getActivity(), FooderIssuaActivity.class);
 		} else {// 美食秀
-
+			Bundle bundle = new Bundle();
+			intent.setClass(getActivity(), FoodMessageActivity.class);
 		}
 		startActivityForResult(intent, 0);
 	}
@@ -116,7 +184,6 @@ public class FoodFragment extends Fragment implements OnCheckedChangeListener,
 			int position = (Integer) v.getTag();
 			attention(position);
 			break;
-
 		default:
 			break;
 		}
@@ -124,9 +191,10 @@ public class FoodFragment extends Fragment implements OnCheckedChangeListener,
 
 	/**
 	 * 关注
+	 * 
 	 * @param position
 	 */
 	private void attention(int position) {
-		
+
 	}
 }

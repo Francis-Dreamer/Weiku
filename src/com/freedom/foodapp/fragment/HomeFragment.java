@@ -1,7 +1,11 @@
 package com.freedom.foodapp.fragment;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +32,8 @@ import com.freedom.foodapp.R;
 import com.freedom.foodapp.adapter.HomeAdapter;
 import com.freedom.foodapp.adapter.HomeViewPagerAdapter;
 import com.freedom.foodapp.model.FoodModel;
+import com.freedom.foodapp.util.HttpPost;
+import com.freedom.foodapp.util.HttpPost.OnSendListener;
 import com.freedom.foodapp.view.MyGridView;
 
 public class HomeFragment extends Fragment implements OnClickListener,
@@ -63,6 +70,35 @@ public class HomeFragment extends Fragment implements OnClickListener,
 		data_pic.add(R.drawable.viewpager3);
 		
 		data = FoodModel.getData();
+		
+		String url = "http://127.0.0.1/index.php/home/api/recommend";
+		try {
+			HttpPost httpPost = HttpPost.parseUrl(url);
+			httpPost.send();
+			httpPost.setOnSendListener(new OnSendListener() {
+				@Override
+				public void start() {
+					
+				}
+				@Override
+				public void end(String result) {
+					Log.i("HomeFragment", result);
+					try {
+						JSONObject jsonObject = new JSONObject(result);
+						int status = jsonObject.getInt("status");
+						if(status == 1){
+							//获取数据
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private void initView() {

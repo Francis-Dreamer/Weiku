@@ -52,7 +52,7 @@
         <activity android:name="com.freedom.foodapp.LoginActivity" >
         </activity>
         <activity android:name="com.freedom.foodapp.AllPageActivity" >
-             <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -73,6 +73,8 @@
         <activity android:name="com.freedom.foodapp.MyIssuaActivity" >
         </activity>
         <activity android:name="com.freedom.foodapp.IssuaFoodActivity" >
+        </activity>
+        <activity android:name="com.freedom.foodapp.FoodMessageActivity" >
         </activity>
     </application>
 
