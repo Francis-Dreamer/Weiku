@@ -29,7 +29,7 @@
             android:singleLine="true"
             android:text="我是标题"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/px36" />
+            android:textSize="@dimen/px30" />
         <TextView
             android:id="@+id/food_item1_cailiao"
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_marginBottom="@dimen/px10"
             android:layout_marginTop="@dimen/px10"
             android:text="我是材料"
-            android:textColor="@android:color/background_dark"
+            android:textColor="#5e5e5e"
             android:textSize="@dimen/px22" />
         <TextView
             android:id="@+id/food_item1_like"
@@ -49,8 +49,8 @@
             android:drawableLeft="@drawable/like1"
             android:drawablePadding="@dimen/px8"
             android:text="123"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="@dimen/px30" />
+            android:textColor="#5e5e5e"
+            android:textSize="@dimen/px22" />
     </LinearLayout>
 
 </LinearLayout>

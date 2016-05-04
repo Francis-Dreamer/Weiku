@@ -93,7 +93,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	 * @param tel
 	 */
 	private void yanzhengma(String tel) {
-		String httpHost = "http://211.149.198.8:9805/index.php/home/api/verify";
+		String httpHost = "http://211.149.198.8:9805/index.php/weiku/api/verify";
 		try {
 			HttpPost httpPost = HttpPost.parseUrl(httpHost);
 			httpPost.putString("tel", tel);
@@ -128,13 +128,13 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		String verify = et_checknum.getText().toString().trim();
 		String password = et_pwd.getText().toString().trim();
 		
-		String httpHost_add = "http://211.149.198.8:9805/index.php/home/api/register";
+		String httpHost_add = "http://211.149.198.8:9805/index.php/weiku/api/register";
 		try {
 			HttpPost httpPost = HttpPost.parseUrl(httpHost_add);
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("tel", username);
 			map.put("password", password);
-			map.put("verify", verify);
+			map.put("verify", verify);	
 			httpPost.putMap(map);
 			httpPost.send();
 			httpPost.setOnSendListener(new OnSendListener() {

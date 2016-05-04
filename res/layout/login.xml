@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/px20"
             android:text="账号:"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/px30" />
 
         <EditText
             android:id="@+id/login_username"
@@ -56,7 +57,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/px20"
             android:text="密码:"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/px30" />
 
         <EditText
             android:id="@+id/login_password"
@@ -88,7 +90,7 @@
             android:paddingTop="@dimen/px20"
             android:text="注册"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/px32" />
+            android:textSize="@dimen/px24" />
 
         <TextView
             android:id="@+id/login_login"
@@ -101,7 +103,7 @@
             android:paddingTop="@dimen/px20"
             android:text="登录"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/px32" />
+            android:textSize="@dimen/px24" />
     </LinearLayout>
 
 </LinearLayout>

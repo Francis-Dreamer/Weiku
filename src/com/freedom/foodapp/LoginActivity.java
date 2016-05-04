@@ -11,10 +11,14 @@ import com.freedom.foodapp.util.HttpPost;
 import com.freedom.foodapp.util.HttpPost.OnSendListener;
 import com.freedom.foodapp.util.SharedPreferencesUtil;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -59,6 +63,56 @@ public class LoginActivity extends Activity implements OnClickListener {
 			break;
 		}
 	}
+	
+	@SuppressLint("HandlerLeak")
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what) {
+			case 007:
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+				Toast.makeText(getApplicationContext(), "登录超时",
+						Toast.LENGTH_LONG).show();
+				break;
+			default:
+				break;
+			}
+		}
+	};
+	
+	private void time() {
+		overtime = true;
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (overtime) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					s++;
+					if (s == 20) {
+						Log.e("time", "登录超时");
+						s = 0;
+						overtime = false;
+						handler.sendEmptyMessage(007);
+					}
+				}
+			}
+		}).start();
+	}
+	
+	private void clearDialog() {
+		if (progressDialog != null) {
+			progressDialog.dismiss();
+		}
+		overtime = false;
+		s = 0;
+	}
 
 	private void register() {
 		Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -72,9 +126,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 	 * @param password
 	 */
 	private void login() {
+		progressDialog = ProgressDialog.show(LoginActivity.this, "登录中",
+				"请稍后.....");
+		time();
 		final String tel = et_username.getText().toString().trim();
 		String password = et_password.getText().toString().trim();
-		String httpHost = "http://211.149.198.8:9805/index.php/home/api/login";
+		String httpHost = "http://211.149.198.8:9805/index.php/weiku/api/login";
 		try {
 			HttpPost hp_login = HttpPost.parseUrl(httpHost);
 			Map<String, String> map = new HashMap<String, String>();
@@ -89,6 +146,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 				@Override
 				public void end(String result) {
+					clearDialog();
 					try {
 						JSONObject jo = new JSONObject(result);
 						if (jo.getInt("status") == 1) {

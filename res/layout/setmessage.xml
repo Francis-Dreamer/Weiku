@@ -19,14 +19,15 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="头像"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/px34" />
 
         <ImageView
             android:id="@+id/setmsg_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/icon" />
+            android:src="@drawable/defalut" />
     </RelativeLayout>
 
     <LinearLayout
@@ -44,7 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="昵称"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/px34" />
 
         <EditText
             android:id="@+id/setmsg_username"
@@ -55,7 +57,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="请输入昵称"
-            android:textSize="@dimen/px22" />
+            android:textSize="@dimen/px30" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,7 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="性别"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/px34" />
 
         <RadioGroup
             android:id="@+id/setmsg_radiogroup"
@@ -91,7 +94,8 @@
                 android:drawablePadding="@dimen/px10"
                 android:paddingLeft="@dimen/px10"
                 android:text="男"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/px30" />
 
             <RadioButton
                 android:id="@+id/setmsg_rbtn_woman"
@@ -103,7 +107,8 @@
                 android:drawablePadding="@dimen/px10"
                 android:paddingLeft="@dimen/px10"
                 android:text="女"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/px30" />
         </RadioGroup>
     </LinearLayout>
 
@@ -121,7 +126,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="年龄"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/px34" />
 
         <EditText
             android:id="@+id/setmsg_age"
@@ -132,7 +138,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="请输入年龄"
-            android:textSize="@dimen/px22" />
+            android:textSize="@dimen/px30" />
     </LinearLayout>
 
 </LinearLayout>

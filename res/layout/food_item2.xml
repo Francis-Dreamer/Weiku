@@ -29,7 +29,7 @@
             android:singleLine="true"
             android:text="我是标题"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/px36" />
+            android:textSize="@dimen/px30" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:text="美食帖11"
-                android:textColor="@android:color/background_dark"
+                android:textColor="#5e5e5e"
                 android:textSize="@dimen/px22" />
 
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_marginLeft="@dimen/px50"
                 android:singleLine="true"
                 android:text="收藏11"
-                android:textColor="@android:color/background_dark"
+                android:textColor="#5e5e5e"
                 android:textSize="@dimen/px22" />
         </LinearLayout>
     </LinearLayout>
@@ -68,7 +68,7 @@
         android:background="@drawable/shape_food_attention"
         android:text="已关注"
         android:clickable="true"
-        android:textColor="#FE4652"
-        android:textSize="@dimen/px36" />
+        android:textColor="#fe4652"
+        android:textSize="@dimen/px24" />
 
 </LinearLayout>

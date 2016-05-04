@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/px20"
             android:text="账号:"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/px30" />
 
         <EditText
             android:id="@+id/register_username"
@@ -31,7 +32,8 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="请输入您的手机号码"
-            android:textSize="@dimen/px24" />
+            android:textColor="#8c8c8c"
+            android:textSize="@dimen/px20" />
     </LinearLayout>
 
     <LinearLayout
@@ -49,7 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/px20"
             android:text="验证:"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/px30" />
 
         <EditText
             android:id="@+id/register_checknum"
@@ -59,7 +62,8 @@
             android:layout_marginRight="@dimen/px10"
             android:layout_weight="1"
             android:background="@null"
-            android:password="true"
+            android:hint="请输入验证码"
+            android:textColor="#8c8c8c"
             android:textSize="@dimen/px24" />
 
         <TextView
@@ -67,14 +71,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/px20"
             android:background="@drawable/shape_register"
             android:paddingBottom="@dimen/px8"
             android:paddingLeft="@dimen/px16"
             android:paddingRight="@dimen/px16"
-            android:layout_marginRight="@dimen/px20"
             android:paddingTop="@dimen/px8"
             android:text="获取验证码"
-            android:textColor="#FE4652"
+            android:textColor="#fe4652"
             android:textSize="@dimen/px20" />
     </LinearLayout>
 
@@ -91,7 +95,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/px20"
             android:text="密码:"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/px30" />
 
         <EditText
             android:id="@+id/register_password"
@@ -101,6 +106,8 @@
             android:layout_weight="1"
             android:background="@null"
             android:password="true"
+            android:hint="请输入您的密码"
+            android:textColor="#8c8c8c"
             android:textSize="@dimen/px24" />
     </LinearLayout>
 
@@ -126,8 +133,8 @@
         android:gravity="center"
         android:paddingBottom="@dimen/px20"
         android:paddingTop="@dimen/px20"
-        android:text="登录"
+        android:text="注册"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/px32" />
+        android:textSize="@dimen/px24" />
 
 </LinearLayout>

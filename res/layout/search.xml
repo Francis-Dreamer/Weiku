@@ -32,7 +32,8 @@
                 android:drawablePadding="@dimen/px6"
                 android:gravity="center_horizontal"
                 android:text="综合"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:textSize="@dimen/px22" />
 
             <RadioButton
                 android:id="@+id/search_rbtn_renqi"
@@ -44,7 +45,8 @@
                 android:drawablePadding="@dimen/px6"
                 android:gravity="center_horizontal"
                 android:text="人气"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:textSize="@dimen/px22" />
 
             <RadioButton
                 android:id="@+id/search_rbtn_new"
@@ -56,7 +58,8 @@
                 android:drawablePadding="@dimen/px6"
                 android:gravity="center_horizontal"
                 android:text="最新"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:textSize="@dimen/px22" />
         </RadioGroup>
     </LinearLayout>
 
@@ -67,8 +70,7 @@
         android:layout_margin="@dimen/px10"
         android:layout_weight="1"
         android:divider="#F2F2F2"
-        android:scrollbars="none"
-        android:dividerHeight="@dimen/px10" >
-    </ListView>
+        android:dividerHeight="@dimen/px10"
+        android:scrollbars="none" />
 
 </LinearLayout>

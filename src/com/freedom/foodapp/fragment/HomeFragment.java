@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment implements OnClickListener,
 		
 		data = FoodModel.getData();
 		
-		String url = "http://127.0.0.1/index.php/home/api/recommend";
+		String url = "http://211.149.198.8:9805/index.php/weiku/api/recommend";
 		try {
 			HttpPost httpPost = HttpPost.parseUrl(url);
 			httpPost.send();

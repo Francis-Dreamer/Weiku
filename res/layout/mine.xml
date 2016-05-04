@@ -21,7 +21,7 @@
             android:layout_height="@dimen/px180"
             android:layout_gravity="center_horizontal"
             android:scaleType="fitXY"
-            android:src="@drawable/icon" />
+            android:src="@drawable/defalut" />
 
         <TextView
             android:id="@+id/mine_name"
@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/collect"
+            android:drawableLeft="@drawable/collect1"
             android:drawablePadding="@dimen/px10"
             android:text="收藏"
             android:textColor="@android:color/black" />

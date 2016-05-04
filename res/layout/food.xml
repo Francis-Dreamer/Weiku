@@ -33,7 +33,8 @@
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/px10"
             android:text="美食秀"
-            android:textColor="@android:color/black" />
+            android:textSize="@dimen/px30"
+            android:textColor="#040404" />
 
         <RadioButton
             android:id="@+id/food_rbtn_2"
@@ -46,7 +47,8 @@
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/px10"
             android:text="美食达人"
-            android:textColor="@android:color/black" />
+            android:textSize="@dimen/px30"
+            android:textColor="#040404" />
     </RadioGroup>
 
     <ListView

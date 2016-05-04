@@ -40,7 +40,7 @@
             android:singleLine="true"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
-            android:textSize="@dimen/px28" />
+            android:textSize="@dimen/px22" />
     </LinearLayout>
 
 </RelativeLayout>
