@@ -7,6 +7,7 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.freedom.foodapp.IssuaFoodActivity;
 import com.freedom.foodapp.LoginActivity;
 import com.freedom.foodapp.MyAttentionActivity;
 import com.freedom.foodapp.MyIssuaActivity;
@@ -14,10 +15,10 @@ import com.freedom.foodapp.MyCollectActivity;
 import com.freedom.foodapp.R;
 import com.freedom.foodapp.RegisterActivity;
 import com.freedom.foodapp.SetActivity;
-import com.freedom.foodapp.SetMessageActivity;
 import com.freedom.foodapp.cache.AsyncImageLoader;
 import com.freedom.foodapp.cache.ImageCacheManager;
 import com.freedom.foodapp.model.UserModel;
+import com.freedom.foodapp.util.BitmapUtil;
 import com.freedom.foodapp.util.HttpPost;
 import com.freedom.foodapp.util.SharedPreferencesUtil;
 import com.freedom.foodapp.util.HttpPost.OnSendListener;
@@ -28,6 +29,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +38,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MineFragment extends Fragment implements OnClickListener {
 	View view;
@@ -62,9 +65,13 @@ public class MineFragment extends Fragment implements OnClickListener {
 
 		initView();
 
-		initData();
-
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		initData();
 	}
 
 	private void initData() {
@@ -140,18 +147,18 @@ public class MineFragment extends Fragment implements OnClickListener {
 	}
 
 	private void setMessage() {
-		if(data.getSpecialname().equals("null")){
-			tv_name.setText(""+data.getUsername());
-		}else{
-			tv_name.setText(""+data.getSpecialname());
+		if (TextUtils.isEmpty(data.getSpecialname())) {
+			tv_name.setText("" + data.getUsername());
+		} else {
+			tv_name.setText("" + data.getSpecialname());
 		}
-		
-		if(!data.getImg().equals("null")){
-			String url_icon = url_top+data.getImg();
+
+		if (!TextUtils.isEmpty(data.getImg())) {
+			String url_icon = url_top + data.getImg();
 			iv_icon.setTag(url_icon);
-			Bitmap bt = imageLoader.loadBitmap(iv_icon, url_icon,false );
-			if(bt != null){
-				iv_icon.setImageBitmap(bt);
+			Bitmap bt = imageLoader.loadBitmap(iv_icon, url_icon, false);
+			if (bt != null) {
+				iv_icon.setImageBitmap(BitmapUtil.toRoundBitmap(bt));
 			}
 		}
 	}
@@ -167,6 +174,8 @@ public class MineFragment extends Fragment implements OnClickListener {
 			tel = tok.split(",")[1];
 			token = tok.split(",")[0];
 			return true;
+		} else {
+			Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_LONG).show();
 		}
 		return false;
 	}
@@ -176,20 +185,28 @@ public class MineFragment extends Fragment implements OnClickListener {
 		Intent intent = new Intent();
 		switch (v.getId()) {
 		case R.id.rightImage:
-			intent.setClass(getActivity(), SetMessageActivity.class);
-			startActivityForResult(intent, 0);
+			if (checkLogin()) {
+				intent.setClass(getActivity(), IssuaFoodActivity.class);
+				startActivityForResult(intent, 0);
+			}
 			break;
 		case R.id.rlayout_mine_collect:
-			intent.setClass(getActivity(), MyCollectActivity.class);
-			startActivityForResult(intent, 0);
+			if (checkLogin()) {
+				intent.setClass(getActivity(), MyCollectActivity.class);
+				startActivityForResult(intent, 0);
+			}
 			break;
 		case R.id.rlayout_mine_issua:
-			intent.setClass(getActivity(), MyIssuaActivity.class);
-			startActivityForResult(intent, 0);
+			if (checkLogin()) {
+				intent.setClass(getActivity(), MyIssuaActivity.class);
+				startActivityForResult(intent, 0);
+			}
 			break;
 		case R.id.rlayout_mine_attention:
-			intent.setClass(getActivity(), MyAttentionActivity.class);
-			startActivityForResult(intent, 0);
+			if (checkLogin()) {
+				intent.setClass(getActivity(), MyAttentionActivity.class);
+				startActivityForResult(intent, 0);
+			}
 			break;
 		case R.id.rlayout_mine_set:
 			intent.setClass(getActivity(), SetActivity.class);

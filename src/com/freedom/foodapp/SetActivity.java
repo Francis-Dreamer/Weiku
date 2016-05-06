@@ -97,10 +97,12 @@ public class SetActivity extends Activity implements OnClickListener {
 					try {
 						JSONObject jo = new JSONObject(result);
 						if (jo.getInt("status") == 1) {
-							SharedPreferencesUtil.deleteData(getApplicationContext());
+							SharedPreferencesUtil
+									.deleteData(getApplicationContext());
 							Toast.makeText(getApplicationContext(), "退出登录成功！",
 									Toast.LENGTH_SHORT).show();
-						}else{
+							finish();
+						} else {
 							Toast.makeText(getApplicationContext(), "退出登录失败！",
 									Toast.LENGTH_SHORT).show();
 						}
@@ -125,7 +127,7 @@ public class SetActivity extends Activity implements OnClickListener {
 			tel = tok.split(",")[1];
 			token = tok.split(",")[0];
 			return true;
-		}
+		} 
 		return false;
 	}
 }

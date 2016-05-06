@@ -33,6 +33,7 @@
             android:background="@null"
             android:hint="请输入您的手机号码"
             android:textColor="#8c8c8c"
+            android:singleLine="true"
             android:textSize="@dimen/px20" />
     </LinearLayout>
 
@@ -63,6 +64,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="请输入验证码"
+            android:singleLine="true"
             android:textColor="#8c8c8c"
             android:textSize="@dimen/px24" />
 
@@ -108,6 +110,7 @@
             android:password="true"
             android:hint="请输入您的密码"
             android:textColor="#8c8c8c"
+            android:singleLine="true"
             android:textSize="@dimen/px24" />
     </LinearLayout>
 
@@ -116,10 +119,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/px25"
-        android:layout_marginLeft="@dimen/px20"
         android:layout_marginTop="@dimen/px25"
-        android:button="@drawable/selector_checkbox"
-        android:paddingLeft="@dimen/px20"
+        android:button="@null"
+        android:drawableLeft="@drawable/selector_checkbox"
+        android:drawablePadding="@dimen/px10"
         android:text="我已认真阅读并同意该用户协议。"
         android:textColor="@android:color/black"
         android:textSize="@dimen/px23" />

@@ -2,11 +2,10 @@ package com.freedom.foodapp.adapter;
 
 import java.util.List;
 
-import com.freedom.foodapp.R;
-import com.freedom.foodapp.model.FooderModel;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,25 +14,37 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.freedom.foodapp.R;
+import com.freedom.foodapp.cache.AsyncImageLoader;
+import com.freedom.foodapp.cache.ImageCacheManager;
+import com.freedom.foodapp.model.FooderIssuaModer.FooderMessage;
+
 public class FooderAdapter extends BaseAdapter implements OnClickListener {
 
-	List<FooderModel> data;
+	List<FooderMessage> data;
 	LayoutInflater inflater;
 	OnSetAttentionClickListener attentionClickListener;
 	Context context;
+	AsyncImageLoader imageLoader;
+	String url_top = "http://211.149.198.8:9805";
 
 	public FooderAdapter() {
 	}
 
-	public FooderAdapter(Context context, List<FooderModel> data,
+	public FooderAdapter(Context context, List<FooderMessage> data,
 			OnSetAttentionClickListener attentionClickListener) {
 		this.data = data;
 		this.inflater = LayoutInflater.from(context);
 		this.context = context;
 		this.attentionClickListener = attentionClickListener;
+		ImageCacheManager cacheManager = new ImageCacheManager(context);
+		imageLoader = new AsyncImageLoader(context,
+				cacheManager.getMemoryCache(),
+				cacheManager.getPlacardFileCache());
+
 	}
 
-	public void setData(List<FooderModel> data) {
+	public void setData(List<FooderMessage> data) {
 		this.data = data;
 		this.notifyDataSetChanged();
 	}
@@ -74,20 +85,40 @@ public class FooderAdapter extends BaseAdapter implements OnClickListener {
 					.findViewById(R.id.food_item2_tiezi);
 			holder.tv_attention = (TextView) convertView
 					.findViewById(R.id.food_item2_attention);
+			holder.tv_attention.setTag(position);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		FooderModel model = (FooderModel) getItem(position);
-		holder.imageView.setImageResource(Integer.parseInt(model.getIcon()));
-		holder.tv_tiezi.setText("美食帖 " + model.getTiezi());
-		holder.tv_collect.setText("收藏 " + model.getCollect());
-		holder.tv_title.setText("" + model.getName());
-		if (model.getAttention()) {
-			holder.tv_attention.setText("关注");
+		FooderMessage model = (FooderMessage) getItem(position);
+
+		holder.tv_tiezi.setText("美食帖 " + model.getPublish_num());
+		holder.tv_collect.setText("收藏 " + model.getCollection_num());
+		if (!TextUtils.isEmpty(model.getSpecialname())) {
+			holder.tv_title.setText("" + model.getSpecialname());
 		} else {
-			holder.tv_attention.setText("取消关注");
+			holder.tv_title.setText("" + model.getUsername());
 		}
+
+		String img = model.getImg();
+		if (!TextUtils.isEmpty(img) && !img.equals("null")) {
+			String url_img = url_top + img;
+			holder.imageView.setTag(url_img);
+			holder.imageView
+					.setImageResource(R.drawable.friends_sends_pictures_no);
+			Bitmap bitmap = imageLoader.loadBitmap(holder.imageView, url_img,
+					true);
+			if (bitmap != null) {
+				holder.imageView.setImageBitmap(bitmap);
+			} else {
+				holder.imageView
+						.setImageResource(R.drawable.friends_sends_pictures_no);
+			}
+		} else {
+			holder.imageView
+					.setImageResource(R.drawable.friends_sends_pictures_no);
+		}
+
 		holder.tv_attention.setOnClickListener(this);
 		return convertView;
 	}

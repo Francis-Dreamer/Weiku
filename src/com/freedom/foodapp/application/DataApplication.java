@@ -16,4 +16,8 @@ public class DataApplication extends Application {
 		this.imagePath = imagePath;
 	}
 	
+	public void clearImage() {
+		this.imagePath = "";
+	}
+	
 }

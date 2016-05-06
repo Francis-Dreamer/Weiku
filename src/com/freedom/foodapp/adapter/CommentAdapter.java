@@ -2,10 +2,18 @@ package com.freedom.foodapp.adapter;
 
 import java.util.List;
 
+import com.freedom.foodapp.R;
+import com.freedom.foodapp.cache.AsyncImageLoader;
+import com.freedom.foodapp.cache.ImageCacheManager;
+import com.freedom.foodapp.model.FoodMessageModel.CommentModel;
+import com.freedom.foodapp.util.BitmapUtil;
+import com.freedom.foodapp.util.TimeUtil;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,23 +21,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.freedom.foodapp.R;
-import com.freedom.foodapp.cache.AsyncImageLoader;
-import com.freedom.foodapp.cache.ImageCacheManager;
-import com.freedom.foodapp.model.FoodModel.FoodMessage;
+public class CommentAdapter extends BaseAdapter {
 
-@SuppressLint("InflateParams")
-public class FoodAdapter extends BaseAdapter {
-
-	List<FoodMessage> data;
+	List<CommentModel> data;
 	LayoutInflater inflater;
-	String url_top = "http://211.149.198.8:9805";
 	AsyncImageLoader imageLoader;
+	String url_top = "http://211.149.198.8:9805";
 
-	public FoodAdapter() {
+	public CommentAdapter() {
+
 	}
 
-	public FoodAdapter(Context context, List<FoodMessage> data) {
+	public CommentAdapter(Context context, List<CommentModel> data) {
 		this.data = data;
 		this.inflater = LayoutInflater.from(context);
 		ImageCacheManager cacheManager = new ImageCacheManager(context);
@@ -38,7 +41,7 @@ public class FoodAdapter extends BaseAdapter {
 				cacheManager.getPlacardFileCache());
 	}
 	
-	public void setData(List<FoodMessage> data){
+	public void setData(List<CommentModel> data){
 		this.data = data;
 		this.notifyDataSetChanged();
 	}
@@ -58,52 +61,52 @@ public class FoodAdapter extends BaseAdapter {
 		return position;
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		Log.e("getView = "+getCount(), "position = " +position);
 		ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = inflater.inflate(R.layout.food_item1, null);
+			convertView = inflater.inflate(R.layout.foodmessage_comment, null);
 			holder.imageView = (ImageView) convertView
-					.findViewById(R.id.food_item1_iamge);
-			holder.tv_title = (TextView) convertView
-					.findViewById(R.id.food_item1_title);
-			holder.tv_like = (TextView) convertView
-					.findViewById(R.id.food_item1_like);
-			holder.tv_cailiao = (TextView) convertView
-					.findViewById(R.id.food_item1_cailiao);
+					.findViewById(R.id.comment_icon);
+			holder.tv_name = (TextView) convertView
+					.findViewById(R.id.comment_name);
+			holder.tv_time = (TextView) convertView
+					.findViewById(R.id.comment_time);
+			holder.tv_comment = (TextView) convertView
+					.findViewById(R.id.comment_comment);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		FoodMessage model = (FoodMessage) getItem(position);
-		holder.tv_like.setText(model.getPraise() + "");
-		holder.tv_title.setText(model.getTitle() + "");
-		holder.tv_cailiao.setText(model.getMaterial()+"");
-		
+		CommentModel model = (CommentModel) getItem(position);
+
 		String img = model.getImg();
 		if (!TextUtils.isEmpty(img)) {
 			String url_img = url_top + img;
 			holder.imageView.setTag(url_img);
-			holder.imageView
-					.setImageResource(R.drawable.friends_sends_pictures_no);
 			Bitmap bitmap = imageLoader.loadBitmap(holder.imageView, url_img,
-					true);
+					false);
 			if (bitmap != null) {
-				holder.imageView.setImageBitmap(bitmap);
+				holder.imageView.setImageBitmap(BitmapUtil
+						.toRoundBitmap(bitmap));
 			} else {
-				holder.imageView
-						.setImageResource(R.drawable.friends_sends_pictures_no);
+				holder.imageView.setImageResource(R.drawable.defalut);
 			}
-		} else {
-			holder.imageView
-					.setImageResource(R.drawable.friends_sends_pictures_no);
 		}
+
+		holder.tv_name.setText("" + model.getSpecialname());
+		String time = model.getAddtime()+"000";
+		holder.tv_time.setText("" + TimeUtil.getTimeBy1(Long.parseLong(time)));
+		holder.tv_comment.setText("" + model.getContent());
+
 		return convertView;
 	}
 
 	class ViewHolder {
 		ImageView imageView;
-		TextView tv_title, tv_cailiao, tv_like;
+		TextView tv_name, tv_time, tv_comment;
 	}
 }

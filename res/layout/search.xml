@@ -9,58 +9,71 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/px55"
         android:layout_marginTop="@dimen/px1"
-        android:background="#FE4652"
-        android:orientation="horizontal" >
+        android:background="#FE4652" >
 
         <RadioGroup
             android:id="@+id/search_radiogroup"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/px5"
-            android:paddingTop="@dimen/px5" >
+            android:layout_weight="1"
+            android:orientation="horizontal" >
 
             <RadioButton
                 android:id="@+id/search_rbtn_all"
-                android:layout_width="@dimen/px80"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/px20"
+                android:layout_weight="1"
                 android:button="@null"
+                android:checked="true"
                 android:drawableBottom="@drawable/selector_search_line"
-                android:drawablePadding="@dimen/px6"
                 android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/px5"
+                android:paddingLeft="0dp"
+                android:paddingTop="@dimen/px5"
                 android:text="综合"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/px22" />
 
             <RadioButton
                 android:id="@+id/search_rbtn_renqi"
-                android:layout_width="@dimen/px80"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/px20"
+                android:layout_weight="1"
                 android:button="@null"
                 android:drawableBottom="@drawable/selector_search_line"
-                android:drawablePadding="@dimen/px6"
                 android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/px5"
+                android:paddingLeft="0dp"
+                android:paddingTop="@dimen/px5"
                 android:text="人气"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/px22" />
 
             <RadioButton
                 android:id="@+id/search_rbtn_new"
-                android:layout_width="@dimen/px80"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/px20"
+                android:layout_weight="1"
                 android:button="@null"
                 android:drawableBottom="@drawable/selector_search_line"
-                android:drawablePadding="@dimen/px6"
                 android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/px5"
+                android:paddingLeft="0dp"
+                android:paddingTop="@dimen/px5"
                 android:text="最新"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/px22" />
         </RadioGroup>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <ListView
@@ -72,5 +85,16 @@
         android:divider="#F2F2F2"
         android:dividerHeight="@dimen/px10"
         android:scrollbars="none" />
+
+    <TextView
+        android:id="@+id/tv_search_noData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/px20"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:text="未搜索到数据。。。"
+        android:textSize="@dimen/px32"
+        android:textColor="@android:color/black" />
 
 </LinearLayout>

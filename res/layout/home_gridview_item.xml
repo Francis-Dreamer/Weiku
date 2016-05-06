@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/home_item_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/px220"
         android:adjustViewBounds="true"
         android:scaleType="fitXY" />
 
@@ -33,6 +33,8 @@
             android:layout_height="wrap_content"
             android:text="100"
             android:drawableLeft="@drawable/like1"
+            android:drawablePadding="@dimen/px10"
+            android:layout_marginRight="@dimen/px10"
             android:textColor="@android:color/black"
             android:textSize="@dimen/px21" />
     </LinearLayout>

@@ -35,7 +35,7 @@ public class UserModel {
 		return model.message;
 	}
 
-	public class User {
+	public static class User {
 		int id;
 		String username;
 		String specialname;
@@ -135,7 +135,6 @@ public class UserModel {
 		public void setAge(int age) {
 			this.age = age;
 		}
-
 	}
 
 }

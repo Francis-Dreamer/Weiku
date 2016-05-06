@@ -15,7 +15,15 @@
         android:layout_weight="1"
         android:divider="#F2F2F2"
         android:dividerHeight="@dimen/px10"
-        android:scrollbars="none" >
-    </ListView>
+        android:scrollbars="none" />
+
+    <TextView
+        android:id="@+id/myAttention_nodata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px10"
+        android:text="没有关注的对象"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/px30" />
 
 </LinearLayout>

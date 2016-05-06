@@ -6,7 +6,9 @@
         android:topRightRadius="@dimen/px20"
         android:bottomLeftRadius="@dimen/px20"
         android:bottomRightRadius="@dimen/px20"/>
-
+	
+    <solid android:color="@null"/>
+    
     <stroke
         android:width="@dimen/px3"
         android:color="#ffffff" />

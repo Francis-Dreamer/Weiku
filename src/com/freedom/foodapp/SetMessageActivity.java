@@ -1,5 +1,6 @@
 package com.freedom.foodapp;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,25 +8,29 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.freedom.foodapp.cache.AsyncImageLoader;
-import com.freedom.foodapp.cache.ImageCacheManager;
-import com.freedom.foodapp.model.UserModel;
-import com.freedom.foodapp.util.HttpPost;
-import com.freedom.foodapp.util.SharedPreferencesUtil;
-import com.freedom.foodapp.util.HttpPost.OnSendListener;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.freedom.foodapp.application.DataApplication;
+import com.freedom.foodapp.cache.AsyncImageLoader;
+import com.freedom.foodapp.cache.ImageCacheManager;
+import com.freedom.foodapp.model.UserModel;
+import com.freedom.foodapp.util.BitmapUtil;
+import com.freedom.foodapp.util.HttpPost;
+import com.freedom.foodapp.util.HttpPost.OnSendListener;
+import com.freedom.foodapp.util.SharedPreferencesUtil;
 
 public class SetMessageActivity extends Activity implements
 		OnCheckedChangeListener, OnClickListener {
@@ -33,12 +38,14 @@ public class SetMessageActivity extends Activity implements
 	EditText et_username, et_age;
 	RadioGroup group;
 	TextView tv_title, tv_save;
-	String sex = "";
+	String sex = "", username, age;
 	String tel, token;
 	UserModel.User data;
 	RadioButton rbtn_man, rbtn_woman;
 	AsyncImageLoader imageLoader;
 	String url_top = "http://211.149.198.8:9805";
+	File file;
+	DataApplication application;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +95,33 @@ public class SetMessageActivity extends Activity implements
 		}
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (!TextUtils.isEmpty(username)) {
+			et_username.setText(username);
+		}
+		if (!TextUtils.isEmpty(age)) {
+			et_age.setText(age);
+		}
+		if (!TextUtils.isEmpty(sex)) {
+			if (data.getSex().equals("男")) {
+				rbtn_man.setChecked(true);
+				rbtn_woman.setChecked(false);
+			} else if (data.getSex().equals("女")) {
+				rbtn_man.setChecked(false);
+				rbtn_woman.setChecked(true);
+			}
+		}
+		application = (DataApplication) getApplication();
+		String img = application.getImagePath();
+		if (!TextUtils.isEmpty(img)) {
+			file = new File(img);
+			iv_icon.setImageBitmap(BitmapUtil.toRoundBitmap(BitmapUtil
+					.getDiskBitmap(img)));
+		}
+	}
+
 	private void initView() {
 		iv_icon = (ImageView) findViewById(R.id.setmsg_icon);
 		iv_icon.setOnClickListener(this);
@@ -116,30 +150,33 @@ public class SetMessageActivity extends Activity implements
 	 * 加载个人数据信息
 	 */
 	private void setMessage() {
-		if (data.getSpecialname().equals("null")) {
+		String username = data.getSpecialname();
+		if (TextUtils.isEmpty(username)) {
 			et_username.setText("");
 		} else {
-			et_username.setText("" + data.getSpecialname());
+			et_username.setText("" + username);
 		}
 
-		if (!data.getSex().equals("null")) {
+		sex = data.getSex();
+		if (!TextUtils.isEmpty(sex)) {
 			if (data.getSex().equals("男")) {
 				rbtn_man.setChecked(true);
 				rbtn_woman.setChecked(false);
-			} else {
+			} else if (data.getSex().equals("女")) {
 				rbtn_man.setChecked(false);
 				rbtn_woman.setChecked(true);
 			}
 		}
 
-		et_username.setText("" + data.getAge());
+		et_age.setText("" + data.getAge());
 
-		if (!data.getImg().equals("null")) {
+		String img = data.getImg();
+		if (!TextUtils.isEmpty(img)) {
 			String url_icon = url_top + data.getImg();
 			iv_icon.setTag(url_icon);
 			Bitmap bt = imageLoader.loadBitmap(iv_icon, url_icon, false);
 			if (bt != null) {
-				iv_icon.setImageBitmap(bt);
+				iv_icon.setImageBitmap(BitmapUtil.toRoundBitmap(bt));
 			}
 		}
 	}
@@ -190,10 +227,17 @@ public class SetMessageActivity extends Activity implements
 		}
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		username = et_username.getText().toString().trim();
+		age = et_age.getText().toString().trim();
+	}
+
 	private void saveMsg() {
 		String url = "http://211.149.198.8:9805/index.php/weiku/api/update_userinfo";
-		String username = et_username.getText().toString().trim();
-		String age = et_age.getText().toString().trim();
+		username = et_username.getText().toString().trim();
+		age = et_age.getText().toString().trim();
 		try {
 			HttpPost hp_login = HttpPost.parseUrl(url);
 			Map<String, String> map = new HashMap<String, String>();
@@ -203,6 +247,9 @@ public class SetMessageActivity extends Activity implements
 			map.put("sex", sex);
 			map.put("age", age);
 			hp_login.putMap(map);
+			if(file != null){
+				hp_login.putFile("img", file, file.getName(), null);
+			}
 			hp_login.send();
 			hp_login.setOnSendListener(new OnSendListener() {
 				@Override
@@ -213,15 +260,12 @@ public class SetMessageActivity extends Activity implements
 				public void end(String result) {
 					try {
 						JSONObject jo = new JSONObject(result);
+						Toast.makeText(getApplicationContext(),
+								jo.getString("message"), Toast.LENGTH_SHORT)
+								.show();
 						if (jo.getInt("status") == 1) {
-							Toast.makeText(getApplicationContext(),
-									jo.getString("message"), Toast.LENGTH_SHORT)
-									.show();
+							application.clearImage();
 							finish();
-						}else{
-							Toast.makeText(getApplicationContext(),
-									jo.getString("message"), Toast.LENGTH_SHORT)
-									.show();
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -234,7 +278,9 @@ public class SetMessageActivity extends Activity implements
 	}
 
 	private void setIcon() {
-
+		Intent intent = new Intent(SetMessageActivity.this,
+				SelectPhotoActivity.class);
+		startActivityForResult(intent, 0);
 	}
 
 }

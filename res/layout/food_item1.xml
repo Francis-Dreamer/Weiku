@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/food_item1_iamge"
         android:layout_width="@dimen/px200"
-        android:layout_height="@dimen/px200"
+        android:layout_height="@dimen/px180"
         android:layout_marginRight="@dimen/px40"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
@@ -39,6 +39,7 @@
             android:layout_marginTop="@dimen/px10"
             android:text="我是材料"
             android:textColor="#5e5e5e"
+            android:ellipsize="end"
             android:textSize="@dimen/px22" />
         <TextView
             android:id="@+id/food_item1_like"

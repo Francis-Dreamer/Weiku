@@ -24,15 +24,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.freedom.foodapp.FoodMessageActivity;
 import com.freedom.foodapp.R;
+import com.freedom.foodapp.SearchActivity;
 import com.freedom.foodapp.adapter.HomeAdapter;
 import com.freedom.foodapp.adapter.HomeViewPagerAdapter;
 import com.freedom.foodapp.model.FoodModel;
+import com.freedom.foodapp.model.FoodModel.FoodMessage;
 import com.freedom.foodapp.util.HttpPost;
+import com.freedom.foodapp.util.SharedPreferencesUtil;
 import com.freedom.foodapp.util.HttpPost.OnSendListener;
 import com.freedom.foodapp.view.MyGridView;
 
@@ -41,14 +45,15 @@ public class HomeFragment extends Fragment implements OnClickListener,
 	View view;
 	MyGridView gridView;
 	ViewPager viewPager;
-	ImageView imageView;
-	TextView tv_title, tv_search;
+	ImageView imageView, iv_search;
+	TextView tv_title;
 	HomeViewPagerAdapter adapter;
 	List<Integer> data_pic;
 	RadioGroup group;
 	RadioButton rbtn1, rbtn2, rbtn3;
 	HomeAdapter adapter_home;
-	List<FoodModel> data;
+	List<FoodMessage> data;
+	private String tel;
 
 	@SuppressLint("InflateParams")
 	@Override
@@ -56,21 +61,27 @@ public class HomeFragment extends Fragment implements OnClickListener,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.home, null);
 
-		initData();
-
+		initViewPagerData();
+		
 		initView();
 
 		return view;
 	}
+	
+	@Override
+	public void onResume() {
+		initData();
+		super.onResume();
+	}
 
-	private void initData() {
+	private void initViewPagerData() {
 		data_pic = new ArrayList<Integer>();
 		data_pic.add(R.drawable.viewpager1);
 		data_pic.add(R.drawable.viewpager2);
 		data_pic.add(R.drawable.viewpager3);
-		
-		data = FoodModel.getData();
-		
+	}
+
+	private void initData() {
 		String url = "http://211.149.198.8:9805/index.php/weiku/api/recommend";
 		try {
 			HttpPost httpPost = HttpPost.parseUrl(url);
@@ -78,27 +89,29 @@ public class HomeFragment extends Fragment implements OnClickListener,
 			httpPost.setOnSendListener(new OnSendListener() {
 				@Override
 				public void start() {
-					
+
 				}
+
 				@Override
 				public void end(String result) {
 					Log.i("HomeFragment", result);
 					try {
 						JSONObject jsonObject = new JSONObject(result);
 						int status = jsonObject.getInt("status");
-						if(status == 1){
-							//获取数据
+						if (status == 1) {
+							// 获取数据
+							data = FoodModel.getJson(result);
+							adapter_home.setData(data);
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
 				}
 			});
-		
+
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	private void initView() {
@@ -108,12 +121,10 @@ public class HomeFragment extends Fragment implements OnClickListener,
 		imageView = (ImageView) view.findViewById(R.id.back);
 		imageView.setVisibility(View.GONE);
 
-		tv_search = (TextView) view.findViewById(R.id.right);
-		tv_search
-				.setCompoundDrawables(
-						getResources().getDrawable(R.drawable.search), null,
-						null, null);
-		tv_search.setOnClickListener(this);
+		iv_search = (ImageView) view.findViewById(R.id.rightImage);
+		iv_search.setImageResource(R.drawable.search);
+		iv_search.setVisibility(View.VISIBLE);
+		iv_search.setOnClickListener(this);
 
 		group = (RadioGroup) view.findViewById(R.id.home_pager_rgroup);
 		group.setOnCheckedChangeListener(this);
@@ -126,19 +137,21 @@ public class HomeFragment extends Fragment implements OnClickListener,
 		viewPager = (ViewPager) view.findViewById(R.id.home_viewpager);
 		viewPager.setAdapter(adapter);
 		viewPager.setOnPageChangeListener(this);
-		
+
 		gridView = (MyGridView) view.findViewById(R.id.home_gridview);
 		gridView.setOnItemClickListener(this);
-		adapter_home = new HomeAdapter(getActivity(),data);
+		adapter_home = new HomeAdapter(getActivity(), data);
 		gridView.setAdapter(adapter_home);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.right:
-			Intent intent = new Intent();
-			startActivityForResult(intent, 0);
+		case R.id.rightImage:
+			if (checkLogin()) {
+				Intent intent = new Intent(getActivity(), SearchActivity.class);
+				startActivityForResult(intent, 0);
+			}
 			break;
 		default:
 			break;
@@ -148,20 +161,15 @@ public class HomeFragment extends Fragment implements OnClickListener,
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		Bundle bundle = new Bundle();
-		bundle.putString("title", data.get(position).getTitle());
-		bundle.putString("image", data.get(position).getImage());
-		bundle.putString("name", data.get(position).getName());
-		bundle.putString("time", data.get(position).getTime());
-		bundle.putInt("like", data.get(position).getLike());
-		bundle.putString("cailiao", data.get(position).getMaterial());
-		bundle.putString("step", data.get(position).getStep());
-		bundle.putBoolean("isLike", data.get(position).isLike());
-		bundle.putBoolean("isCollect", data.get(position).isCollect());
-		
-		Intent intent = new Intent(getActivity(),FoodMessageActivity.class);
-		intent.putExtras(bundle);
-		startActivityForResult(intent, 0);
+		if (checkLogin()) {
+			Bundle bundle = new Bundle();
+			FoodMessage message = data.get(position);
+			bundle.putString("tel", tel);
+			bundle.putInt("id", message.getId());
+			Intent intent = new Intent(getActivity(), FoodMessageActivity.class);
+			intent.putExtras(bundle);
+			startActivityForResult(intent, 0);
+		}
 	}
 
 	@Override
@@ -227,5 +235,21 @@ public class HomeFragment extends Fragment implements OnClickListener,
 		rbtn1.setChecked(false);
 		rbtn2.setChecked(false);
 		rbtn3.setChecked(true);
+	}
+
+	/**
+	 * 判断账号是否登录
+	 * 
+	 * @return
+	 */
+	private boolean checkLogin() {
+		String tok = SharedPreferencesUtil.getData(getActivity());
+		if (tok != null && !tok.equals("")) {
+			tel = tok.split(",")[1];
+			return true;
+		} else {
+			Toast.makeText(getActivity(), "请先登录！", Toast.LENGTH_SHORT).show();
+		}
+		return false;
 	}
 }

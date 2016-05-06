@@ -43,25 +43,24 @@
     <application
         android:name="com.freedom.foodapp.application.DataApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Black.NoTitleBar" >
         <activity
             android:name="com.freedom.foodapp.YindaoPageActivity"
             android:label="@string/app_name" >
-        </activity>
-        <activity android:name="com.freedom.foodapp.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.freedom.foodapp.AllPageActivity" >
+        <activity android:name="com.freedom.foodapp.LoginActivity" >
             
         </activity>
+        <activity android:name="com.freedom.foodapp.AllPageActivity" >
+        </activity>
         <activity android:name="com.freedom.foodapp.RegisterActivity" >
-            
         </activity>
         <activity android:name="com.freedom.foodapp.SetActivity" >
         </activity>
@@ -78,6 +77,12 @@
         <activity android:name="com.freedom.foodapp.IssuaFoodActivity" >
         </activity>
         <activity android:name="com.freedom.foodapp.FoodMessageActivity" >
+        </activity>
+        <activity android:name="com.freedom.foodapp.SelectPhotoActivity" >
+        </activity>
+        <activity android:name="com.freedom.foodapp.SelectShowPhotoActivity" >
+        </activity>
+         <activity android:name="com.freedom.foodapp.SearchActivity" >
         </activity>
     </application>
 

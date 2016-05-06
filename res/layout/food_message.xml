@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="#ffffff"
         android:scrollbars="none" >
 
         <LinearLayout
@@ -44,6 +45,7 @@
                     android:id="@+id/foodMSG_tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/px20"
                     android:layout_toRightOf="@id/foodMSG_tv_name"
                     android:text="2015-1-1"
                     android:textColor="@android:color/black" />
@@ -114,9 +116,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:paddingTop="@dimen/px10"
+                android:background="#F2F2F2"
+                android:divider="#F2F2F2"
+                android:dividerHeight="@dimen/px5"
                 android:scrollbars="none" />
         </LinearLayout>
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px1"
+        android:background="#F2F2F2" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -147,8 +158,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:padding="@dimen/px20"
-                android:button="@drawable/selector_cb_like" />
+                android:button="@drawable/selector_cb_like"
+                android:padding="@dimen/px20" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -161,9 +172,57 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:padding="@dimen/px20"
-                android:button="@drawable/selector_cb_collect" />
+                android:button="@drawable/selector_cb_collect"
+                android:padding="@dimen/px20" />
         </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llayout_home_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#eeeeee"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/px5"
+        android:paddingTop="@dimen/px5"
+        android:visibility="gone" >
+
+        <EditText
+            android:id="@+id/et_home_message"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/px50"
+            android:layout_marginLeft="@dimen/px24"
+            android:layout_marginRight="@dimen/px24"
+            android:layout_weight="5"
+            android:background="@drawable/shape_home_message"
+            android:hint="请留言"
+            android:paddingLeft="@dimen/px5"
+            android:textColor="#333333"
+            android:textSize="@dimen/px24" />
+
+        <TextView
+            android:id="@+id/tv_home_ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shape_home_message"
+            android:gravity="center"
+            android:padding="@dimen/px10"
+            android:text="确定"
+            android:textColor="#000000"
+            android:textSize="@dimen/px24" />
+
+        <TextView
+            android:id="@+id/tv_home_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shape_home_message"
+            android:gravity="center"
+            android:padding="@dimen/px10"
+            android:text="取消"
+            android:textColor="#000000"
+            android:textSize="@dimen/px24" />
     </LinearLayout>
 
 </LinearLayout>

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <com.dream.cutepet.view.MyAlbumImageView
+        <com.freedom.foodapp.view.MyAlbumImageView
             android:id="@+id/iv_photoAlbum_item_imageview"
             android:layout_width="match_parent"
             android:layout_height="150dp"

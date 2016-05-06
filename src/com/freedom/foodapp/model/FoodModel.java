@@ -3,140 +3,116 @@ package com.freedom.foodapp.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.freedom.foodapp.R;
+import com.google.gson.Gson;
 
 public class FoodModel {
-	String title;
-	String material;// 材料
-	String image;
-	int like;
-	String step;// 步骤
-	String time;
-	String name;
-	boolean isLike,isCollect;
 
-	public String getTitle() {
-		return title;
+	int status;
+	List<FoodMessage> message = new ArrayList<FoodModel.FoodMessage>();
+
+	public int getStatus() {
+		return status;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
-	public String getMaterial() {
-		return material;
+	public List<FoodMessage> getMessage() {
+		return message;
 	}
 
-	public void setMaterial(String material) {
-		this.material = material;
+	public void setMessage(List<FoodMessage> message) {
+		this.message = message;
 	}
 
-	public String getImage() {
-		return image;
+	public static class FoodMessage {
+		int id;
+		String title;
+		String material;// 材料
+		String step;// 步骤
+		String img;
+		long addtime;
+		int best;
+		int praise;
+		int uid;
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
+		public String getMaterial() {
+			return material;
+		}
+
+		public void setMaterial(String material) {
+			this.material = material;
+		}
+
+		public String getStep() {
+			return step;
+		}
+
+		public void setStep(String step) {
+			this.step = step;
+		}
+
+		public String getImg() {
+			return img;
+		}
+
+		public void setImg(String img) {
+			this.img = img;
+		}
+
+		public long getAddtime() {
+			return addtime;
+		}
+
+		public void setAddtime(long addtime) {
+			this.addtime = addtime;
+		}
+
+		public int getBest() {
+			return best;
+		}
+
+		public void setBest(int best) {
+			this.best = best;
+		}
+
+		public int getPraise() {
+			return praise;
+		}
+
+		public void setPraise(int praise) {
+			this.praise = praise;
+		}
+
+		public int getUid() {
+			return uid;
+		}
+
+		public void setUid(int uid) {
+			this.uid = uid;
+		}
 	}
 
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public int getLike() {
-		return like;
-	}
-
-	public void setLike(int like) {
-		this.like = like;
-	}
-
-	public String getStep() {
-		return step;
-	}
-
-	public void setStep(String step) {
-		this.step = step;
-	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public boolean isLike() {
-		return isLike;
-	}
-
-	public void setLike(boolean isLike) {
-		this.isLike = isLike;
-	}
-
-	public boolean isCollect() {
-		return isCollect;
-	}
-
-	public void setCollect(boolean isCollect) {
-		this.isCollect = isCollect;
-	}
-
-	public static List<FoodModel> getData() {
-		List<FoodModel> data = new ArrayList<FoodModel>();
-		FoodModel model = new FoodModel();
-		model.title = "糖醋排骨";
-		model.name = "张晓峰";
-		model.time = "2015-1-1";
-		model.like = 12;
-		model.material = "猪小排1000克；葱6段；姜6片；\n\t食盐3克；料酒2汤匙；生抽3汤匙；\n\t老抽2汤匙；米醋5汤匙；白糖45克；";
-		model.step = "我是步骤";
-		model.image = "" + R.drawable.item1;
-		model.isLike = false;
-		model.isCollect = false;
-		data.add(model);
-
-		model = new FoodModel();
-		model.title = "糖醋排骨";
-		model.name = "张晓峰";
-		model.time = "2015-1-1";
-		model.like = 12;
-		model.material = "猪小排1000克；葱6段；姜6片；\n\t食盐3克；料酒2汤匙；生抽3汤匙；\n\t老抽2汤匙；米醋5汤匙；白糖45克；";
-		model.step = "我是步骤";
-		model.image = "" + R.drawable.item1;
-		model.isLike = false;
-		model.isCollect = false;
-		data.add(model);
-
-		model = new FoodModel();
-		model.title = "糖醋排骨";
-		model.name = "张晓峰";
-		model.time = "2015-1-1";
-		model.like = 12;
-		model.material = "猪小排1000克；葱6段；姜6片；\n\t食盐3克；料酒2汤匙；生抽3汤匙；\n\t老抽2汤匙；米醋5汤匙；白糖45克；";
-		model.step = "我是步骤";
-		model.image = "" + R.drawable.item1;
-		model.isLike = false;
-		model.isCollect = false;
-		data.add(model);
-
-		model = new FoodModel();
-		model.title = "糖醋排骨";
-		model.name = "张晓峰";
-		model.time = "2015-1-1";
-		model.like = 12;
-		model.material = "猪小排1000克；葱6段；姜6片；\n\t食盐3克；料酒2汤匙；生抽3汤匙；\n\t老抽2汤匙；米醋5汤匙；白糖45克；";
-		model.step = "我是步骤";
-		model.image = "" + R.drawable.item1;
-		model.isLike = false;
-		model.isCollect = false;
-		data.add(model);
-		
-		return data;
+	public static List<FoodMessage> getJson(String json) {
+		Gson gson = new Gson();
+		FoodModel model = gson.fromJson(json, FoodModel.class);
+		return model.message;
 	}
 }
