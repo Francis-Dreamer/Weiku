@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 		tv_register = (TextView) findViewById(R.id.login_register);
 		tv_login.setOnClickListener(this);
 		tv_register.setOnClickListener(this);
+		
+		TextView tv_title = (TextView) findViewById(R.id.title);
+		tv_title.setText("登录");
+		
+		ImageView iv_back = (ImageView) findViewById(R.id.back);
+		iv_back.setVisibility(View.GONE);
 	}
 
 	@Override

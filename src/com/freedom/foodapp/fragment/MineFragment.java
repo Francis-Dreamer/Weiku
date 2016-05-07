@@ -71,6 +71,14 @@ public class MineFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (checkLogin()) {
+			mine_llayout_unlogin.setVisibility(View.GONE);
+			tv_name.setVisibility(View.VISIBLE);
+		} else {
+			mine_llayout_unlogin.setVisibility(View.VISIBLE);
+			tv_name.setVisibility(View.GONE);
+		}
+		
 		initData();
 	}
 
@@ -122,13 +130,7 @@ public class MineFragment extends Fragment implements OnClickListener {
 		tv_name = (TextView) view.findViewById(R.id.mine_name);
 		mine_llayout_unlogin = (LinearLayout) view
 				.findViewById(R.id.mine_llayout_unlogin);
-		if (checkLogin()) {
-			mine_llayout_unlogin.setVisibility(View.GONE);
-			tv_name.setVisibility(View.VISIBLE);
-		} else {
-			mine_llayout_unlogin.setVisibility(View.VISIBLE);
-			tv_name.setVisibility(View.GONE);
-		}
+		
 		tv_login = (TextView) view.findViewById(R.id.mine_login);
 		tv_register = (TextView) view.findViewById(R.id.mine_register);
 		tv_login.setOnClickListener(this);

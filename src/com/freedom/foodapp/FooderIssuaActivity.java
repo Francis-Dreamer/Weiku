@@ -13,6 +13,8 @@ import com.freedom.foodapp.cache.AsyncImageLoader;
 import com.freedom.foodapp.cache.ImageCacheManager;
 import com.freedom.foodapp.model.FoodModel;
 import com.freedom.foodapp.model.FoodModel.FoodMessage;
+import com.freedom.foodapp.model.FooderIssuaModer;
+import com.freedom.foodapp.model.UserModel.User;
 import com.freedom.foodapp.util.BitmapUtil;
 import com.freedom.foodapp.util.HttpPost;
 import com.freedom.foodapp.util.HttpPost.OnSendListener;
@@ -22,6 +24,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -39,7 +42,10 @@ public class FooderIssuaActivity extends Activity implements OnClickListener,
 	FoodAdapter adapter;
 	String url_top = "http://211.149.198.8:9805";
 	AsyncImageLoader imageLoader;
-
+	User user;
+	ImageView iv_icon;
+	TextView tv_name;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,6 +72,7 @@ public class FooderIssuaActivity extends Activity implements OnClickListener,
 		try {
 			HttpPost httpPost = HttpPost.parseUrl(url);
 			Map<String, String> map = new HashMap<String, String>();
+			Log.e("FooderIssuaActivity", "Tel="+tel+",id="+id);
 			map.put("Tel", tel);
 			map.put("daren_id", id + "");
 			httpPost.putMap(map);
@@ -78,11 +85,14 @@ public class FooderIssuaActivity extends Activity implements OnClickListener,
 
 				@Override
 				public void end(String result) {
+					Log.e("FooderIssuaActivity", result);
 					try {
 						JSONObject jo = new JSONObject(result);
 						if (jo.getInt("status") == 1) {
 							data = FoodModel.getJson(result);
+							user = FooderIssuaModer.getJson(result).getUser();
 							adapter.setData(data);
+							showUser();
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -97,9 +107,28 @@ public class FooderIssuaActivity extends Activity implements OnClickListener,
 	private void initData() {
 		Bundle bundle = getIntent().getExtras();
 		tel = bundle.getString("tel");
-		id = bundle.getInt("daren_id");
-		name = bundle.getString("name");
-		img = bundle.getString("img");
+		id = bundle.getInt("id");
+	}
+	
+
+	private void showUser() {
+		img = user.getImg();
+		name = user.getSpecialname();
+		if(TextUtils.isEmpty(user.getSpecialname())){
+			name = user.getUsername();
+		}
+		tv_name.setText(name+"");
+		
+		if(!TextUtils.isEmpty(img)){
+			String url_img = url_top + img;
+			iv_icon.setTag(url_img);
+			Bitmap bitmap = imageLoader.loadBitmap(iv_icon, url_img, false);
+			if(bitmap != null){
+				iv_icon.setImageBitmap(BitmapUtil.toRoundBitmap(bitmap));
+			}else{
+				iv_icon.setImageResource(R.drawable.defalut);
+			}
+		}
 	}
 
 	private void initView() {
@@ -114,20 +143,8 @@ public class FooderIssuaActivity extends Activity implements OnClickListener,
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(this);
 
-		ImageView iv_icon = (ImageView) findViewById(R.id.fooder_issua_icon);
-		if(!TextUtils.isEmpty(img)){
-			String url_img = url_top + img;
-			iv_icon.setTag(url_img);
-			Bitmap bitmap = imageLoader.loadBitmap(iv_icon, url_img, false);
-			if(bitmap != null){
-				iv_icon.setImageBitmap(BitmapUtil.toRoundBitmap(bitmap));
-			}else{
-				iv_icon.setImageResource(R.drawable.defalut);
-			}
-		}
-		
-		TextView tv_name = (TextView) findViewById(R.id.fooder_issua_name);
-		tv_name.setText(name+"");
+		iv_icon = (ImageView) findViewById(R.id.fooder_issua_icon);
+		tv_name = (TextView) findViewById(R.id.fooder_issua_name);
 	}
 
 	@Override

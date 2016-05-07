@@ -49,6 +49,9 @@ public class SetActivity extends Activity implements OnClickListener {
 
 		iv_back = (ImageView) findViewById(R.id.back);
 		iv_back.setOnClickListener(this);
+		
+		TextView tv_title = (TextView) findViewById(R.id.title);
+		tv_title.setText("设置");
 	}
 
 	@Override

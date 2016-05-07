@@ -115,43 +115,49 @@ public class IssuaFoodActivity extends Activity implements OnClickListener {
 		name = et_name.getText().toString().trim();
 		cailiao = et_cailiao.getText().toString().trim();
 		step = et_step.getText().toString().trim();
-		String url = "http://211.149.198.8:9805/index.php/weiku/api/publish";
-		try {
-			HttpPost post = HttpPost.parseUrl(url);
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("tel",
-					SharedPreferencesUtil.getData(getApplicationContext())
-							.split(",")[1]);
-			map.put("title", name);
-			map.put("material", cailiao);
-			map.put("step", step);
-			map.put("best", "1");
-			post.putMap(map);
-			post.putFile("img", file, file.getName(), null);
-			post.send();
-			post.setOnSendListener(new OnSendListener() {
-				@Override
-				public void start() {
-				}
-
-				@Override
-				public void end(String result) {
-					try {
-						JSONObject jo = new JSONObject(result);
-						Toast.makeText(getApplication(),
-								jo.getString("message"), Toast.LENGTH_SHORT)
-								.show();
-						if (jo.getInt("status") == 1) {
-							application.clearImage();
-							finish();
-						}
-					} catch (JSONException e) {
-						e.printStackTrace();
+		if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(cailiao)
+				&& !TextUtils.isEmpty(step) && file != null) {
+			String url = "http://211.149.198.8:9805/index.php/weiku/api/publish";
+			try {
+				HttpPost post = HttpPost.parseUrl(url);
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("tel",
+						SharedPreferencesUtil.getData(getApplicationContext())
+								.split(",")[1]);
+				map.put("title", name);
+				map.put("material", cailiao);
+				map.put("step", step);
+				map.put("best", "1");
+				post.putMap(map);
+				post.putFile("img", file, file.getName(), null);
+				post.send();
+				post.setOnSendListener(new OnSendListener() {
+					@Override
+					public void start() {
 					}
-				}
-			});
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
+
+					@Override
+					public void end(String result) {
+						try {
+							JSONObject jo = new JSONObject(result);
+							Toast.makeText(getApplication(),
+									jo.getString("message"), Toast.LENGTH_SHORT)
+									.show();
+							if (jo.getInt("status") == 1) {
+								application.clearImage();
+								finish();
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			Toast.makeText(getApplication(), "请填写完所有资料！", Toast.LENGTH_SHORT)
+					.show();
 		}
 	}
 }

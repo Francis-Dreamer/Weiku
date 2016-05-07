@@ -37,6 +37,7 @@ public class FileCache {
 		// demo.
 		// String filename=String.valueOf(url.hashCode());
 		// Another possible solution (thanks to grantland)
+		@SuppressWarnings("deprecation")
 		String filename = URLEncoder.encode(url);
 		File f = new File(mCacheDir, filename);
 		Log.e("文件缓存", "path = " + f.getPath());

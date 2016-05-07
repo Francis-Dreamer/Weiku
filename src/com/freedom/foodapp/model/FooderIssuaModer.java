@@ -3,11 +3,13 @@ package com.freedom.foodapp.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.freedom.foodapp.model.UserModel.User;
 import com.google.gson.Gson;
 
 public class FooderIssuaModer {
 	int status;
 	List<FooderMessage> message = new ArrayList<FooderIssuaModer.FooderMessage>();
+	User user;
 
 	public int getStatus() {
 		return status;
@@ -24,11 +26,19 @@ public class FooderIssuaModer {
 	public void setMessage(List<FooderMessage> message) {
 		this.message = message;
 	}
-	
-	public static List<FooderMessage> getJson(String result){
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public static FooderIssuaModer getJson(String result) {
 		Gson gson = new Gson();
 		FooderIssuaModer model = gson.fromJson(result, FooderIssuaModer.class);
-		return model.message;
+		return model;
 	}
 
 	public static class FooderMessage {
@@ -42,6 +52,7 @@ public class FooderIssuaModer {
 		String collection;
 		String praise;
 		String care;
+		boolean is_care;
 		long regtime;
 		int collection_num;
 		int publish_num;
@@ -149,5 +160,14 @@ public class FooderIssuaModer {
 		public void setPublish_num(int publish_num) {
 			this.publish_num = publish_num;
 		}
+
+		public boolean isIs_care() {
+			return is_care;
+		}
+
+		public void setIs_care(boolean is_care) {
+			this.is_care = is_care;
+		}
+
 	}
 }

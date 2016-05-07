@@ -118,6 +118,14 @@ public class FooderAdapter extends BaseAdapter implements OnClickListener {
 			holder.imageView
 					.setImageResource(R.drawable.friends_sends_pictures_no);
 		}
+		
+		if(!TextUtils.isEmpty(model.isIs_care()+"")){
+			if(model.isIs_care()){
+				holder.tv_attention.setText("已关注");
+			}else{
+				holder.tv_attention.setText("关注");
+			}
+		}
 
 		holder.tv_attention.setOnClickListener(this);
 		return convertView;

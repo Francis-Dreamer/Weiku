@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,12 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		tv_register = (TextView) findViewById(R.id.register_register);
 		tv_getNum.setOnClickListener(this);
 		tv_register.setOnClickListener(this);
+		
+		TextView tv_title = (TextView) findViewById(R.id.title);
+		tv_title.setText("注册");
+		
+		ImageView iv_back = (ImageView) findViewById(R.id.back);
+		iv_back.setOnClickListener(this);
 	}
 
 	@Override
@@ -57,6 +64,9 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.register_getCheckNum:
 			getCheckNum();
+			break;
+		case R.id.back:
+			finish();
 			break;
 		default:
 			break;

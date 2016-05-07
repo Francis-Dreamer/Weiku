@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -52,7 +54,8 @@ public class FoodFragment extends Fragment implements OnCheckedChangeListener,
 
 	FoodAdapter adapter_food;
 	FooderAdapter adapter_fooder;
-
+	RadioButton rbtn_food,rbtn_fooder;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,13 +79,24 @@ public class FoodFragment extends Fragment implements OnCheckedChangeListener,
 
 		listView = (ListView) view.findViewById(R.id.food_listview);
 		listView.setOnItemClickListener(this);
+		
+		rbtn_food = (RadioButton) view.findViewById(R.id.food_rbtn_1);
+		rbtn_fooder = (RadioButton) view.findViewById(R.id.food_rbtn_2);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		// 默认先加载美食秀的列表信息
-		initFoodData();
+		if(flog){//加载美食达人
+			rbtn_food.setChecked(false);
+			rbtn_fooder.setChecked(true);
+			initFooderData();
+		}else{//加载美食秀
+			rbtn_food.setChecked(true);
+			rbtn_fooder.setChecked(false);
+			initFoodData();
+		}
 	}
 
 	private void initFoodData() {
@@ -122,6 +136,9 @@ public class FoodFragment extends Fragment implements OnCheckedChangeListener,
 		String url = "http://211.149.198.8:9805/index.php/weiku/api/Master";
 		try {
 			HttpPost httpPost = HttpPost.parseUrl(url);
+			if(!TextUtils.isEmpty(tel)){
+				httpPost.putString("tel", tel);
+			}
 			httpPost.send();
 			httpPost.setOnSendListener(new OnSendListener() {
 				@Override
@@ -136,7 +153,7 @@ public class FoodFragment extends Fragment implements OnCheckedChangeListener,
 						int status = jo.getInt("status");
 						if (status == 1) {
 							// 获取数据
-							data_fooder = FooderIssuaModer.getJson(result);
+							data_fooder = FooderIssuaModer.getJson(result).getMessage();
 							selectFooder();
 						}
 					} catch (JSONException e) {
@@ -165,6 +182,7 @@ public class FoodFragment extends Fragment implements OnCheckedChangeListener,
 
 	private void selectFooder() {
 		flog = true;
+		checkLogin();
 		adapter_fooder = new FooderAdapter(getActivity(), data_fooder, this);
 		listView.setAdapter(adapter_fooder);
 	}
